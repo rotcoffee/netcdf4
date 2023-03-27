@@ -35,14 +35,67 @@ or download it [here](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp)
 
 ### On Windows:
 
-* Install NetCDF4 from [here](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp)
+* Install NetCDF4 from [here](https://www.unidata.ucar.edu/downloads/netcdf/index.jsp) (or [here v4.7.4](https://github.com/parro-it/netcdf4/releases/tag/prebuilt-netcdf))
 * Make sure to select at least "dependencies", "headers" and "libraries" to install in the NetCDF installation wizard
-* Install the build tools as described [here](https://github.com/nodejs/node-gyp#on-windows)
+* Install the build tools as described [here](https://github.com/nodejs/node-gyp#on-windows) ([What is Chocolatey?](https://chocolatey.org/))
+  
+  ```
+  choco install visualstudio2019buildtools
+  choco install visualstudio2019-workload-vctools
+  ```
+  
+  ```
+  npm i -g node-gyp  
+  ```
 * Set the environment variable `NETCDF_DIR` to your NetCDF installation, e.g.,
-```bash
-C:\> set NETCDF_DIR=C:\Program Files\netCDF 4.6.1
+  ```
+  C:\> set NETCDF_DIR=C:\Program Files\netCDF 4.7.4
+  ```
+  or (git bash)
+  ```
+  export NETCDF_DIR='C:\Program Files\netCDF 4.7.4'
+  ```
+  or (PowerShell)
+  ```
+  $Env:NETCDF_DIR='C:\Program Files\netCDF 4.7.4'
+  ```
+
+## Build and Test on Windows
+
+### Environment
+- NetCDF 4.7.4
+- node@18.15.0
+- node-gyp@9.3.1
+- python 3.9.13
+- msvs_version=2019
+
+### Build and Test
+```
+git clone https://github.com/rotcoffee/netcdf4.git
+node-gyp clean
+node-gyp configure
+node-gyp build
+npm test
 ```
 
+### Install netcdf4 to project
+Set your path e.g.,
+```
+"dependencies": {
+		...
+    "netcdf4": "file:../path/netcdf4"
+  }
+```
+Install netcdf4 module (not symbolic link)
+```
+npm i netcdf4 --install-links
+```
+
+### Build on Electron
+For Electron-forge & Electron rebuild, Set the environment variable `GYP_MSVS_VERSION`
+```
+export GYP_MSVS_VERSION=2019
+```
 
 ## Usage
 

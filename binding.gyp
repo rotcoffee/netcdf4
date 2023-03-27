@@ -57,7 +57,19 @@
                         "VCLinkerTool": {
                             "AdditionalLibraryDirectories": "<(netcdf_dir)/lib"
                         }
-                    }
+                    },
+                    "copies":[
+                        {
+                        'destination': './build/Release',
+                        'files': [
+                            '<(netcdf_dir)/bin/hdf5.dll',
+                            '<(netcdf_dir)/bin/hdf5_hl.dll',
+                            '<(netcdf_dir)/bin/netcdf.dll',
+                            '<(netcdf_dir)/bin/vcruntime140.dll',
+                            '<(netcdf_dir)/bin/zlib1.dll'
+                        ]
+                        }
+                    ]
                 }]
             ]
         }
